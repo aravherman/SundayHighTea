@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Sunday High Tea Schedule</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#b87333",
+              accent: "#fdf2f0",
+              "tag-bg": "#f9e5e2",
+              "text-main": "#3e2723",
+              "text-muted": "#8d6e63",
+              "background-light": "#fdf8f5",
+            },
+            fontFamily: {
+              display: ["Manrope", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+    <style type="text/tailwindcss">
+      :root {
+        --warm-rose: #f9e5e2;
+        --cocoa-brown: #3e2723;
+      }
+      body {
+        font-family: "Manrope", sans-serif;
+        background-color: #fdf8f5;
+      }
+    </style>
+  </head>
+  <body class="bg-background-light text-text-main antialiased min-h-screen">
+    <div class="max-w-7xl mx-auto px-6 py-12 lg:py-20">
+      <header
+        class="mb-12 flex flex-col md:flex-row md:items-center justify-between gap-6"
+      >
+        <div class="flex items-center gap-4">
+          <div
+            class="size-10 bg-primary rounded-xl flex items-center justify-center text-white shadow-lg shadow-primary/20"
+          >
+            <span class="material-symbols-outlined font-bold">local_cafe</span>
+          </div>
+          <h1
+            class="text-3xl lg:text-4xl font-extrabold text-text-main tracking-tight"
+          >
+            Sunday High Tea Schedule
+          </h1>
+        </div>
+        <div class="flex items-center gap-4">
+          <span class="text-sm font-semibold text-text-muted uppercase tracking-wider">YEAR</span>
+          <div class="h-4 w-px bg-text-muted/20"></div>
+          <span class="text-sm font-semibold text-text-muted uppercase tracking-wider year"></span>
+      </header>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {% for month in months %}
+            <div class="bg-white p-8 rounded-2xl shadow-sm border border-black/5 hover:shadow-md transition-shadow">
+
+            <h3 class="text-lg font-bold mb-6">{{ month.name }}</h3>
+
+            <div class="flex flex-wrap gap-2">
+
+            {% for sunday in month.sundays %}
+                <input type="hidden" name="date" value="{{ sunday.date }}">
+                <p class="text-[10  px] font-semibold dis
+                    {% if sunday.status == 'Booked' %}
+                        text-red-500
+                    {% elif sunday.status == 'Available' %}
+                        text-green-600
+                    {% else %}
+                        text-gray-400
+                    {% endif %}">
+                    {{ sunday.status }}</p>
+                <button type="button"
+                onclick="openModal('{{ sunday.date }}')"
+                    class="px-4 py-2 rounded-full text-xs font-bold transition-all
+                    {% if sunday.booked %}
+                        bg-gray-300 text-gray-500 cursor-not-allowed
+                    {% else %}
+                        bg-tag-bg text-text-main hover:brightness-95
+                    {% endif %}"
+                    {% if sunday.booked %}disabled{% endif %}>
+
+                    {{ sunday.date|date:"M d" }}
+
+                </button>
+            {% endfor %}
+
+            </div>
+            </div>
+            {% endfor %}
+
+            <div id="bookingModal"
+                class="fixed inset-0 bg-black/40 hidden flex items-center justify-center">
+
+                <div class="bg-white p-8 rounded-xl w-96 shadow-lg">
+
+                    <h2 class="text-lg font-bold mb-4">Sponsor High Tea</h2>
+
+                    <form method="post" action="{% url 'book_hightea' %}">
+                        {% csrf_token %}
+
+                        <input type="hidden" name="date" id="modalDate">
+
+                        <input type="text" name="sponsor_name"
+                            placeholder="Sponsor Name"
+                            class="w-full border p-2 mb-3 rounded"
+                            required>
+
+                        <input type="text" name="contact"
+                            placeholder="Contact"
+                            class="w-full border p-2 mb-4 rounded">
+
+                        <div class="flex justify-end gap-2">
+                            <button type="button"
+                                    onclick="closeModal()"
+                                    class="px-4 py-2 bg-gray-200 rounded">
+                                Cancel
+                            </button>
+
+                            <button type="submit"
+                                    class="px-4 py-2 bg-blue-600 text-white rounded">
+                                Confirm Booking
+                            </button>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script>
+    const curr_year = new Date().getFullYear();
+    document.querySelector(".year").innerHTML = curr_year;
+
+    function openModal(date) {
+        document.getElementById("modalDate").value = date;
+        document.getElementById("bookingModal").classList.remove("hidden");
+    }
+
+    function closeModal() {
+        document.getElementById("bookingModal").classList.add("hidden");
+    }
+  </script>
+</html>

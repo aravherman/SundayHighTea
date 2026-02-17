@@ -1,0 +1,198 @@
+<!doctype html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Chai Shai on Sunday &amp; Login</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#b87333", // Warm gold/tea-brown
+              accent: "#d4a373", // Terracotta/Dusty Rose accent
+              "text-main": "#3e2723", // Warm cocoa brown
+              "text-muted": "#8d6e63", // Softer brown
+              "background-light": "#fdf8f5", // Very soft warm off-white
+              "background-dark": "#1a0f0a",
+            },
+            fontFamily: {
+              display: ["Manrope", "sans-serif"],
+            },
+            borderRadius: {
+              DEFAULT: "0.25rem",
+              lg: "0.5rem",
+              xl: "0.75rem",
+              full: "9999px",
+            },
+          },
+        },
+      };
+    </script>
+    <style type="text/tailwindcss">
+      :root {
+        --warm-rose: #e6b3b3;
+        --warm-chai: #fdf2f0;
+        --primary-gold: #c69450;
+      }
+      body {
+        font-family: "Manrope", sans-serif;
+      }
+      .hero-gradient {
+        background: linear-gradient(135deg, #fdf2f0 0%, #f4d9d0 100%);
+      }
+    </style>
+  </head>
+  <body
+    class="bg-background-light dark:bg-background-dark text-[#0d1b12] antialiased"
+  >
+    <div class="relative flex min-h-screen w-full overflow-hidden">
+      <!-- Left Side: Hero Section -->
+      <div
+        class="hidden lg:flex lg:w-1/2 hero-gradient relative items-center justify-center p-12 overflow-hidden"
+      >
+        <!-- Decorative Elements -->
+        <div
+          class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/10 rounded-full blur-3xl"
+        ></div>
+        <div
+          class="absolute bottom-[-5%] right-[-5%] w-[30%] h-[30%] bg-primary/20 rounded-full blur-3xl"
+        ></div>
+        <div class="relative z-10 max-w-md">
+          <h1
+            class="text-6xl font-extrabold text-[#0d1b12] leading-[1.1] tracking-tight mb-6"
+          >
+            Welcome <br />
+            <span class="text-primary">Back!</span>
+          </h1>
+          <p class="text-lg text-[#4c9a66] leading-relaxed mb-8 max-w-sm">
+            Bringing people together, one Sunday at a time. View the sponsorship schedule to book your date
+          </p>
+          <div
+            class="w-full aspect-square max-w-[400px] rounded-2xl overflow-hidden shadow-2xl shadow-primary/10 border border-white/40"
+          >
+            <img
+              alt="Tea in cup"
+              class="w-full h-full object-cover"
+              data-alt="A clean minimalist workspace with a green plant and soft natural lighting"
+              src="https://sinfullyspicy.com/wp-content/uploads/2024/04/1200-by-1200-images.jpg"
+            />
+          </div>
+        </div>
+      </div>
+      <!-- Right Side: Login Form -->
+      <div
+        class="w-full lg:w-1/2 flex flex-col bg-white dark:bg-background-dark"
+      >
+        <!-- Simple Navigation Header -->
+        <header class="flex items-center justify-between px-8 py-6 lg:px-12">
+          <div class="flex items-center gap-2">
+            <span class="text-xl font-bold tracking-tight text-[#0d1b12]"
+              >Sunday High Tea</span
+            >
+          </div>
+        </header>
+        <!-- Login Content -->
+        <div class="flex-1 flex items-center justify-center p-8 lg:p-12">
+          <div class="w-full max-w-md">
+            <!-- Friendly Illustration Area -->
+            <div class="mb-10 text-center">
+              <div
+                class="inline-flex size-16 items-center justify-center rounded-2xl bg-primary/10 text-primary mb-4"
+              >
+                <span class="material-symbols-outlined text-4xl">face_6</span>
+              </div>
+              <h2 class="text-3xl font-bold text-[#0d1b12]">
+                Sign in to account
+              </h2>
+              <p class="text-[#4c9a66] mt-2">
+                Enter your details to access your dashboard
+              </p>
+            </div>
+            <!-- Form -->
+            <form class="space-y-6" method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+              <div>
+                <label
+                  class="block text-sm font-bold text-[#0d1b12] mb-2"
+                  for="text"
+                  >Username</label
+                >
+                <input
+                  class="w-full px-4 py-4 rounded-xl border border-[#cfe7d7] bg-[#f8fcf9] focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all outline-none placeholder:text-[#4c9a66]/50"
+                  id="username"
+                  placeholder="Username"
+                  type="text"
+                  name="username"
+                />
+              </div>
+              <div>
+                <div class="flex items-center justify-between mb-2">
+                  <label
+                    class="block text-sm font-bold text-[#0d1b12]"
+                    for="password"
+                    >Password</label
+                  >
+                  <a
+                    class="text-xs font-bold text-primary hover:underline"
+                    href="#"
+                    >Forgot password?</a
+                  >
+                </div>
+                <div class="relative">
+                  <input
+                    class="w-full px-4 py-4 rounded-xl border border-[#cfe7d7] bg-[#f8fcf9] focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all outline-none placeholder:text-[#4c9a66]/50"
+                    id="password"
+                    placeholder="••••••••"
+                    type="password"
+                    name="password"
+                  />
+                  <button
+                    class="absolute right-4 top-1/2 -translate-y-1/2 text-[#4c9a66]"
+                    type="button"
+                  >
+                    <span class="material-symbols-outlined">visibility</span>
+                  </button>
+                </div>
+              </div>
+              <button
+                class="w-full py-4 px-6 bg-primary hover:bg-[#25d360] text-[#0d1b12] font-extrabold rounded-xl transition-all shadow-lg shadow-primary/20 flex items-center justify-center gap-2"
+                type="submit"
+              >
+                <span>Sign In</span>
+                <span class="material-symbols-outlined text-lg"
+                  >arrow_forward</span
+                >
+              </button>
+            </form>
+            <!-- Sign Up Link -->
+            <p class="mt-10 text-center text-sm text-[#4c9a66]">
+              Don't have an account?
+              <a
+                class="font-bold text-[#0d1b12] hover:text-primary transition-colors underline decoration-primary underline-offset-4"
+                href="#"
+                >Create an account</a
+              >
+            </p>
+          </div>
+        </div>
+        <!-- Footer Meta -->
+      </div>
+    </div>
+  </body>
+</html>
