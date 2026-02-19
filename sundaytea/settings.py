@@ -106,3 +106,6 @@ STATIC_URL = 'static/'
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 STATIC_ROOT = BASE_DIR / "staticfiles"
 MIDDLEWARE.insert(1, "whitenoise.middleware.WhiteNoiseMiddleware")
+
+RAZOR_KEY_ID = 'rzp_test_SI0NWvTutyK9AL'
+RAZOR_KEY_SECRET = 'MJ2za4LnEN5Ou0hGnWYA0h3p'
