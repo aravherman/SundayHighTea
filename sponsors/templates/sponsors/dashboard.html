@@ -72,35 +72,35 @@
 
             <h3 class="text-lg font-bold mb-6">{{ month.name }}</h3>
 
-            <div class="flex flex-wrap gap-2">
+            <div class="grid grid-cols-2 gap-2">
+              {% for sunday in month.sundays %}
+              <div class="flex items-center gap-3 p-2">
+                  <input type="hidden" name="date" value="{{ sunday.date }}">
+                  <p class="text-[10  px] font-semibold dis
+                      {% if sunday.status == 'Booked' %}
+                          text-red-500
+                      {% elif sunday.status == 'Available' %}
+                          text-green-600
+                      {% else %}
+                          text-gray-400
+                      {% endif %}">
+                      {{ sunday.status }}</p>
+                  <button type="button"
+                  onclick="openModal('{{ sunday.date }}')"
+                      class="px-4 py-2 rounded-full text-xs font-bold transition-all
+                      {% if sunday.booked %}
+                          bg-gray-300 text-gray-500 cursor-not-allowed
+                      {% else %}
+                          bg-tag-bg text-text-main hover:brightness-95
+                      {% endif %}"
+                      {% if sunday.booked %}disabled{% endif %}>
 
-            {% for sunday in month.sundays %}
-                <input type="hidden" name="date" value="{{ sunday.date }}">
-                <p class="text-[10  px] font-semibold dis
-                    {% if sunday.status == 'Booked' %}
-                        text-red-500
-                    {% elif sunday.status == 'Available' %}
-                        text-green-600
-                    {% else %}
-                        text-gray-400
-                    {% endif %}">
-                    {{ sunday.status }}</p>
-                <button type="button"
-                onclick="openModal('{{ sunday.date }}')"
-                    class="px-4 py-2 rounded-full text-xs font-bold transition-all
-                    {% if sunday.booked %}
-                        bg-gray-300 text-gray-500 cursor-not-allowed
-                    {% else %}
-                        bg-tag-bg text-text-main hover:brightness-95
-                    {% endif %}"
-                    {% if sunday.booked %}disabled{% endif %}>
+                      {{ sunday.date|date:"M d" }}
 
-                    {{ sunday.date|date:"M d" }}
-
-                </button>
-            {% endfor %}
-
-            </div>
+                  </button>
+                </div>
+                {% endfor %}
+              </div>
             </div>
             {% endfor %}
 
