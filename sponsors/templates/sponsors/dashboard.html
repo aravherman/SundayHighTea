@@ -192,7 +192,7 @@
             name: "Sunday High Tea Sponsor",
             handler: function (response) {
 
-                fetch("/verify-payment/", {
+                fetch("{% url 'verify_payment' %}", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/x-www-form-urlencoded",
