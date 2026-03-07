@@ -27,8 +27,8 @@ def login_view(request):
             login(request, user)
             return redirect('dashboard')
         else:
-            return render(request, 'bs/login.html', {'error': 'Invalid user or password'})
-    return render(request, 'bs/login.html')
+            return render(request, 'sponsors/home.html', {'error': 'Invalid user or password'})
+    return render(request, 'sponsors/home.html')
 
 def dashboard(request):
     year = date.today().year
