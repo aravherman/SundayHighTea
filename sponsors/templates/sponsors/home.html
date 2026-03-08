@@ -148,11 +148,6 @@
                     for="password"
                     >Password</label
                   >
-                  <a
-                    class="text-xs font-bold text-primary hover:underline"
-                    href="#"
-                    >Forgot password?</a
-                  >
                 </div>
                 <div class="relative">
                   <input
@@ -165,6 +160,7 @@
                   <button
                     class="absolute right-4 top-1/2 -translate-y-1/2 text-[#4c9a66]"
                     type="button"
+                    id="toggle-password"
                   >
                     <span class="material-symbols-outlined">visibility</span>
                   </button>
@@ -180,19 +176,33 @@
                 >
               </button>
             </form>
-            <!-- Sign Up Link -->
-            <p class="mt-10 text-center text-sm text-[#4c9a66]">
-              Don't have an account?
-              <a
-                class="font-bold text-[#0d1b12] hover:text-primary transition-colors underline decoration-primary underline-offset-4"
-                href="#"
-                >Create an account</a
-              >
-            </p>
           </div>
         </div>
         <!-- Footer Meta -->
+         <footer class="text-center text-sm text-[#4c9a66] pb-6 px-6">
+          <p>
+            This website helps coordinate the 
+            <span class="font-semibold text-primary">Sunday High Tea</span> gathering. 
+            Members can view available Sundays and choose a date if they would like 
+            to organize light snacks and tea for the community that week.
+          </p>
+</footer>
       </div>
     </div>
+    <script>
+      const toggleButton = document.getElementById('toggle-password');
+      const passwordInput = document.getElementById('password');
+      const icon = toggleButton.querySelector('.material-symbols-outlined');
+
+      toggleButton.addEventListener('click', () => {
+        if (passwordInput.type === 'password') {
+          passwordInput.type = 'text';
+          icon.textContent = 'visibility_off';
+        } else {
+          passwordInput.type = 'password';
+          icon.textContent = 'visibility';
+        }
+      });
+    </script>
   </body>
 </html>
