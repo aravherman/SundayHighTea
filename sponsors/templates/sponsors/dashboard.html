@@ -109,7 +109,7 @@
 
                 <div class="bg-white p-8 rounded-xl w-96 shadow-lg">
 
-                    <h2 class="text-lg font-bold mb-4">Sponsor High Tea</h2>
+                    <h2 class="text-lg font-bold mb-4">High Tea</h2>
 
                     <form method="post" action="{% url 'verify_payment' %}">
                         {% csrf_token %}
@@ -117,7 +117,7 @@
                         <input type="hidden" name="date" id="modalDate">
 
                         <input type="text" name="sponsor_name"
-                            placeholder="Sponsor Name"
+                            placeholder="Name"
                             class="w-full border p-2 mb-3 rounded"
                             required>
 
